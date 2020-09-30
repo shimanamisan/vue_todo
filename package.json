@@ -1,0 +1,37 @@
+{
+  "name": "vue_todo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/shimanamisan/vue_todo.git",
+  "author": "shimanamisan",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "autoprefixer": "^10.0.1",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^4.3.0",
+    "file-loader": "^6.1.0",
+    "mini-css-extract-plugin": "^0.11.2",
+    "node-sass": "^4.14.1",
+    "node-sass-glob-importer": "^5.3.2",
+    "optimize-css-assets-webpack-plugin": "^5.0.4",
+    "postcss-loader": "^4.0.2",
+    "prettier": "^2.1.2",
+    "sass": "^1.26.11",
+    "sass-loader": "^10.0.2",
+    "style-loader": "^1.2.1",
+    "terser-webpack-plugin": "^4.2.2",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "vue-loader": "^15.9.3",
+    "vue-template-compiler": "^2.6.12",
+    "webpack": "^4.44.2",
+    "webpack-build-notifier": "^2.1.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-livereload-plugin": "^2.3.0"
+  },
+  "dependencies": {
+    "vue": "^2.6.12"
+  }
+}
