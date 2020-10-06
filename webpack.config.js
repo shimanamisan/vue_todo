@@ -81,21 +81,6 @@ module.exports = {
           {
             loader: "import-glob-loader",
           },
-          // {
-          //   loader: "postcss-loader",
-          //   options: {
-          //     // PostCSS側でもソースマップを有効にする
-          //     sourceMap: true,
-          //     plugins: [
-          //       // Autoprefixerを有効化
-          //       require("autoprefixer")({
-          //         // ☆IEは11以上、Androidは4.4以上
-          //         // その他は最新2バージョンで必要なベンダープレフィックスを付与する設定
-          //         browsers: ["last 2 versions", "ie >= 11", "Android >= 4", "iOS >= 8"],
-          //       }),
-          //     ],
-          //   },
-          // },
         ],
       },
       {

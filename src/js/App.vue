@@ -143,7 +143,7 @@ export default {
       let newData = this.todos.map((item) => {
         if (item.id === todo.id) {
           return Object.assign({}, item, {
-            edit: !item.edit,
+            edit: false,
             value: todo.value,
           });
         }

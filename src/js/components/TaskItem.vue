@@ -10,9 +10,11 @@
         <input class="c-form c-form__edit" type="text" v-model="taskItem.value" @keypress.enter="coloseEdit(taskItem)" @blur="coloseEdit(taskItem)" />
       </template>
       <template v-else>
-        <span class="p-task__item__text" :class="{ 'p-task__item--isDoneText': taskItem.isDone }" @dblclick="taskEdit(taskItem.id)">{{
-          taskItem.value
-        }}</span>
+        <div class="p-task__item__wrapp" @dblclick="taskEdit(taskItem.id)">
+          <span class="p-task__item__text" :class="{ 'p-task__item--isDoneText': taskItem.isDone }" >{{
+            taskItem.value
+          }}</span>
+        </div>
       </template>
       <span class="u-handle"></span>
       <i class="fas fa-trash-alt p-task__trash" @click="removeItem(taskItem.id)"></i
@@ -36,9 +38,6 @@ export default {
         red: taskItem.isDone,
       };
     },
-    // taskValue() {
-    //   return this.taskItem.value;
-    // },
   },
   methods: {
     changeIsDone(id) {
