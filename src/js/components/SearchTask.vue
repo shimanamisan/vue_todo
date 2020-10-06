@@ -9,13 +9,13 @@
 export default {
   data() {
     return {
-      searchValueData: "",
+      searchValueData: null,
     };
   },
   methods: {
-    searchValue(event) {
+    searchValue() {
       // console.log("Searchコンポーネント：" + event.target.value)
-      this.$emit("search-event", event.target.value);
+      this.$emit("search-event", this.searchValueData);
     },
   },
 };

@@ -44,11 +44,19 @@ export default {
   data() {
     return {
       todos: [],
+      searchWord: "",
     };
   },
   computed: {
     getTask() {
-      return this.todos;
+      if(this.searchWord !== ""){
+        return this.todos.filter((item) => {
+          let serchItem = new RegExp("^" + this.searchWord, "i")
+          return item.value.match(serchItem)
+        })
+      }else{
+        return this.todos
+      }
     },
   },
   methods: {
@@ -60,7 +68,7 @@ export default {
         console.log("タスク初期作成用 " + id);
         let task = {
           id: id,
-          value: `Taks0${i}`,
+          value: `Task${i}`,
           isDone: false,
         };
         this.todos.push(task);
@@ -69,7 +77,8 @@ export default {
     },
     // タスクを検索
     searchValue(searchValueData) {
-      console.log("子コンポーネントから受け取った検索用の値：".searchValueData);
+      console.log("子コンポーネントから受け取った検索用の値");
+      this.searchWord = searchValueData;
     },
     // 新しいタスクを追加
     createNewTask(createValue) {
