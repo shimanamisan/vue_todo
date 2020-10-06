@@ -3,20 +3,27 @@
     position: relative;
   }
   &__item {
+    position: relative;
+    z-index: 1;
     margin-bottom: 16px;
     font-size: 1.1rem;
     background-color: #fff;
     transition: background-color 0.4s ease;
     @include custumRadius(5px);
     padding: 8px;
-    &:hover {
-      cursor: move;
-    }
-    & > span {
+    &__text {
       padding: 5px 0px;
       user-select: none; // テキストを選択できないようにする
-      &:hover {
+      &:hover{
         cursor: pointer;
+      }
+      &::before{
+        content :"タスクを編集します";
+        visibility: hidden;
+        position: absolute;
+        &:hover{
+          visibility: none;
+        }
       }
     }
     &--isDone {

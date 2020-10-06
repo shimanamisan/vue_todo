@@ -33,6 +33,8 @@
     position: relative;
   }
   &__edit {
+    position: relative;
+    z-index: 3;
     width: 77%;
     display: inline-block;
     font-size: 1rem;

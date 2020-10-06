@@ -17,7 +17,13 @@
           <div class="c-form__wrapp">
             <SearchTask @search-event="searchValue" />
           </div>
-          <TaskList :task-data="getTask" @isdone-event="changeIsDone" @remove-event="removeItem" />
+          <TaskList
+            :task-data="getTask"
+            @isdone-event="changeIsDone"
+            @remove-event="removeItem"
+            @edit-event="taskEdit"
+            @editclose-event="coloseEdit"
+          />
         </div>
       </div>
     </div>
@@ -49,13 +55,13 @@ export default {
   },
   computed: {
     getTask() {
-      if(this.searchWord !== ""){
+      if (this.searchWord !== "") {
         return this.todos.filter((item) => {
-          let serchItem = new RegExp("^" + this.searchWord, "i")
-          return item.value.match(serchItem)
-        })
-      }else{
-        return this.todos
+          let serchItem = new RegExp("^" + this.searchWord, "i");
+          return item.value.match(serchItem);
+        });
+      } else {
+        return this.todos;
       }
     },
   },
@@ -70,6 +76,7 @@ export default {
           id: id,
           value: `Task${i}`,
           isDone: false,
+          edit: false,
         };
         this.todos.push(task);
         id = null;
@@ -120,6 +127,29 @@ export default {
 
       // lodashを使ったやり方
       // this.todos = _.reject(this.todos, { id: id });
+    },
+    taskEdit(id) {
+      console.log("editの変更 【親コンポーネント】：" + id);
+      let newData = this.todos.map((item) => {
+        if (item.id === id) {
+          return Object.assign({}, item, { edit: !item.edit });
+        }
+        return item;
+      });
+      return (this.todos = newData);
+    },
+    coloseEdit(todo) {
+      console.log("editの変更 【親コンポーネント】：" + JSON.stringify(todo));
+      let newData = this.todos.map((item) => {
+        if (item.id === todo.id) {
+          return Object.assign({}, item, {
+            edit: !item.edit,
+            value: todo.value,
+          });
+        }
+        return item;
+      });
+      return (this.todos = newData);
     },
     // タスクのユニークなIDを生成
     createId() {

@@ -1,13 +1,20 @@
 <template>
   <div>
-    <li class="p-task__item" :class="{'p-task__item--isDone': taskItem.isDone}">
+    <li class="p-task__item" :class="{ 'p-task__item--isDone': taskItem.isDone }">
       <i
         class="c-form__check"
         :class="{ 'far fa-circle': !taskItem.isDone, 'fas fa-check-circle': taskItem.isDone }"
         @click="changeIsDone(taskItem.id)"
       ></i>
-
-      <span :class="{'p-task__item--isDoneText': taskItem.isDone}">{{ taskItem.value }}</span>
+      <template v-if="this.taskItem.edit">
+        <input class="c-form c-form__edit" type="text" v-model="taskItem.value" @keypress.enter="coloseEdit(taskItem)" @blur="coloseEdit(taskItem)" />
+      </template>
+      <template v-else>
+        <span class="p-task__item__text" :class="{ 'p-task__item--isDoneText': taskItem.isDone }" @dblclick="taskEdit(taskItem.id)">{{
+          taskItem.value
+        }}</span>
+      </template>
+      <span class="u-handle"></span>
       <i class="fas fa-trash-alt p-task__trash" @click="removeItem(taskItem.id)"></i
       ><!-- 引数に削除する要素のIDを指定 -->
     </li>
@@ -20,14 +27,18 @@ export default {
   data() {
     return {
       data: this.taskItem,
+      editValue: "",
     };
   },
-  computed:{
-    classObject(){
-      return{
-        red: taskItem.isDone
-      }
-    }
+  computed: {
+    classObject() {
+      return {
+        red: taskItem.isDone,
+      };
+    },
+    // taskValue() {
+    //   return this.taskItem.value;
+    // },
   },
   methods: {
     changeIsDone(id) {
@@ -37,6 +48,14 @@ export default {
     removeItem(id) {
       console.log("タスクの削除 【孫コンポーネント】：" + id);
       this.$emit("remove-event", id);
+    },
+    taskEdit(id) {
+      console.log("タスクの編集 【孫コンポーネント】：" + id);
+      this.$emit("edit-event", id);
+    },
+    coloseEdit(todo) {
+      // console.log("タスクの解除 【孫コンポーネント】：" + event.targte.value + id);
+      this.$emit("editclose-event", todo);
     },
   },
 };
