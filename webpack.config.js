@@ -11,7 +11,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin"); // app.jsとapp
 const TerserPlugin = require("terser-webpack-plugin"); // JSのコメントをビルド時に削除する
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin"); // 別ファイルに出力したCSSファイルを圧縮するために必要
 const WebpackBuildNotifierPlugin = require("webpack-build-notifier"); // 通知用プラグイン
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin"); // プロダクションモードでバンドル時に、console.logを自動的に削除するプラグイン
 
 console.log(`これがoutputPathです ：${outputPath}`);
@@ -19,10 +19,10 @@ console.log(`これがaliasです ：${alias}`);
 
 // [定数] webpack の出力オプションを指定します
 // 'production' か 'development' を指定
-const MODE = "development";
+const MODE = "production";
 
 // ソースマップの利用有無(productionのときはソースマップを利用しない)
-const enabledSourceMap = MODE === "development";
+const enabledSourceMap = MODE === "production";
 
 // モジュールにオブジェクトを設定する
 module.exports = {
@@ -45,7 +45,7 @@ module.exports = {
     open: true,
     writeToDisk: true,
     watchContentBase: true,
-    port: 8080,
+    port: 8081,
   },
   // loaderを登録していく
   module: {
@@ -128,7 +128,7 @@ module.exports = {
           // 指定のサイズを超過すると、画像が[name]で指定されたファイルに書き換わり独立する
           // あたかもimgディレクトリ配下に存在しているかのように、別ファイルとして出力できる（Developerツールでも確認済み）
           // 50KB以上だったらファイルとしてコピー（分離）する
-          limit: 50 * 1024, 
+          limit: 50 * 1024,
           name: "./../img/[name].[ext]",
         },
       },
@@ -148,13 +148,16 @@ module.exports = {
     }),
     new WebpackBuildNotifierPlugin(),
     new CleanWebpackPlugin({
-      cleanAfterEveryBuildPatterns: ['*hot*', '!main.js'],
+      cleanAfterEveryBuildPatterns: ["*hot*", "!main.js"],
     }),
   ],
   // 最適化（webpack4から導入された）
   optimization: {
     // optimizationの設定の中のminimizerという設定にUglifyJsPluginインスタンスを渡す
     minimizer: [
+      new TerserPlugin({
+        extractComments: "all",
+      }),
       new UglifyJsPlugin({
         uglifyOptions: {
           compress: {
@@ -163,7 +166,6 @@ module.exports = {
         },
       }),
       new OptimizeCssAssetsPlugin({}),
-      new TerserPlugin()
     ],
   },
   // import 文で .ts ファイルを解決するため
