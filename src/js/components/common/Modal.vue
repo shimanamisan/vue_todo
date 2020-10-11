@@ -1,25 +1,50 @@
 <template>
   <div>
     <div class="c-modal">
-    <div class="close icon" @click="close"></div>
-        <div class="c-modal__body">
-          <li>
-              Vue.js todo list
-          </li>
-          <li>
-              jQuery todo list
-          </li>
-          <li>
-              React.js todo list
-          </li>
-        </div>
+      <div class="close icon" @click="close"></div>
+      <div class="c-modal__body">
+        <li class="c-modal__body__list">
+          <IconLogo :icon-path="this.vue_path" :todo-link="todoLink.vue"/>
+          <div>
+            <p>Vue.js todo list</p>
+          </div>
+        </li>
+        <li class="c-modal__body__list">
+          <IconLogo :icon-path="this.jquery_path" />
+          <div>
+            <p>jQuery todo list</p>
+          </div>
+        </li>
+        <li class="c-modal__body__list">
+          <IconLogo :icon-path="this.react_path" />
+          <div>
+            <p>React.js todo list</p>
+          </div>
+        </li>
+      </div>
     </div>
     <div class="c-modal__bg" @click="close"></div>
   </div>
 </template>
 
 <script>
+import IconLogo from "./IconLogo";
 export default {
+  data() {
+    return {
+      vue_path: "../img/vue_logo.svg",
+      jquery_path: "../img/jquery_logo.svg",
+      react_path: "../img/react_logo.svg",
+      todoLink: {
+        vue: "http://todo-app.shimanamisan.com/",
+        jquery: "",
+        react: "",
+      },
+    };
+  },
+  components: {
+    IconLogo,
+  },
   methods: {
     close() {
       this.$emit("modal-close");

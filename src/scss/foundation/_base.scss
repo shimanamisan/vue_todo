@@ -53,7 +53,11 @@ button {
   box-sizing: inherit; // 親要素の値を継承する
 }
 
-.particles-js-canvas-el{
+li {
+  list-style: none;
+}
+
+.particles-js-canvas-el {
   position: fixed;
   background-color: #5f65a4;
   background-repeat: no-repeat;

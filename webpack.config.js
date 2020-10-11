@@ -19,10 +19,10 @@ console.log(`これがaliasです ：${alias}`);
 
 // [定数] webpack の出力オプションを指定します
 // 'production' か 'development' を指定
-const MODE = "production";
+const MODE = "development";
 
 // ソースマップの利用有無(productionのときはソースマップを利用しない)
-const enabledSourceMap = MODE === "production";
+const enabledSourceMap = MODE === "development";
 
 // モジュールにオブジェクトを設定する
 module.exports = {
@@ -128,7 +128,7 @@ module.exports = {
           // 指定のサイズを超過すると、画像が[name]で指定されたファイルに書き換わり独立する
           // あたかもimgディレクトリ配下に存在しているかのように、別ファイルとして出力できる（Developerツールでも確認済み）
           // 50KB以上だったらファイルとしてコピー（分離）する
-          limit: 50 * 1024,
+          limit: 1 * 1024,
           name: "./../img/[name].[ext]",
         },
       },

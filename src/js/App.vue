@@ -6,13 +6,16 @@
           <h1 class="p-title">Todo List</h1>
           <VueLogo />
         </div>
+        <transition name="modal">
+          <Modal v-show="open" @modal-close="modalClose" />
+        </transition>
         <div class="l-main__sub">
           <div class="c-form__wrapp">
             <CreateTask @create-event="createNewTask" />
           </div>
           <div class="c-btn__wrapp">
             <DeleteBtn @delete-event="isDoneAllDelete" />
-            <OtherTodo />
+            <OtherTodo @modal-open="modalOpen"/>
           </div>
           <div class="c-form__wrapp">
             <SearchTask @search-event="searchValue" />
@@ -38,6 +41,7 @@ import SearchTask from "@/components/SearchTask";
 import DeleteBtn from "@/components/DeleteBtn";
 import OtherTodo from "@/components/OtherTodo";
 import CreateTask from "@/components/CreateTask";
+import Modal from "@/components/common/Modal";
 export default {
   components: {
     VueLogo,
@@ -46,11 +50,13 @@ export default {
     DeleteBtn,
     SearchTask,
     TaskList,
+    Modal,
   },
   data() {
     return {
       todos: [],
       searchWord: "",
+      open: false,
     };
   },
   computed: {
@@ -182,6 +188,12 @@ export default {
       } else {
         // 何もしない
       }
+    },
+    modalOpen() {
+      this.open = !this.open;
+    },
+    modalClose() {
+      this.open = !this.open;
     },
   },
   // 初回アクセス時にタスクを生成

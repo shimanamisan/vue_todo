@@ -1,12 +1,15 @@
 .c-modal {
   position: fixed;
-  min-height: 90%;
+  height: calc(100vh - 100px);
   width: 60%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
   @include custumRadius(3px);
+  @include mq() {
+    width: 90%;
+  }
   z-index: 101;
   &__bg {
     position: fixed;
@@ -23,13 +26,23 @@
     width: 100%;
     box-sizing: border-box;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    &__list {
+      margin-bottom: 32px;
+      & > div > p {
+        font-size: 22px;
+      }
+    }
   }
 }
 
 .close.icon {
   color: #000;
   position: absolute;
-  top: 2%;
+  top: 4%;
   right: 4%;
   margin-top: 0;
   margin-left: 0;
