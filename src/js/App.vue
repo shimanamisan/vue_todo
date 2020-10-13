@@ -15,7 +15,7 @@
           </div>
           <div class="c-btn__wrapp">
             <DeleteBtn @delete-event="isDoneAllDelete" />
-            <OtherTodo @modal-open="modalOpen"/>
+            <OtherTodo @modal-open="modalOpen" />
           </div>
           <div class="c-form__wrapp">
             <SearchTask @search-event="searchValue" />
@@ -72,22 +72,6 @@ export default {
     },
   },
   methods: {
-    // 初回アクセス時にタスクを生成
-    createTask() {
-      let id = null;
-      for (let i = 1; i <= 3; i++) {
-        id = this.createId();
-        console.log("タスク初期作成用 " + id);
-        let task = {
-          id: id,
-          value: `Task${i}`,
-          isDone: false,
-          edit: false,
-        };
-        this.todos.push(task);
-        id = null;
-      }
-    },
     // タスクを検索
     searchValue(searchValueData) {
       console.log("子コンポーネントから受け取った検索用の値");
@@ -196,9 +180,34 @@ export default {
       this.open = !this.open;
     },
   },
+  watch: {
+    todos: {
+      // 配列内のオブジェクトのプロパティが更新されたときも監視するには、ディープウォチャー機能を使う
+      handler: function () {
+        localStorage.setItem("todos", JSON.stringify(this.todos));
+      },
+      deep: true, // ディープオプションを有効にする
+    },
+  },
   // 初回アクセス時にタスクを生成
-  mounted() {
-    this.createTask();
+  mounted: function () {
+    // ローカルストレージに値が保存されていなかったら空の配列を返す
+    this.todos = JSON.parse(localStorage.getItem("todos")) || [];
+
+    // todosの配列が空だったらタスクを登録する
+    if (Object.keys(this.todos).length === 0) {
+      for (let i = 1; i <= 3; i++) {
+        let id = this.createId();
+        console.log("タスク初期作成用 " + id);
+        let task = {
+          id: id,
+          value: `Task${i}`,
+          isDone: false,
+          edit: false,
+        };
+        this.todos.push(task);
+      }
+    }
   },
 };
 </script>

@@ -19,10 +19,10 @@ console.log(`これがaliasです ：${alias}`);
 
 // [定数] webpack の出力オプションを指定します
 // 'production' か 'development' を指定
-const MODE = "development";
+const MODE = "production";
 
 // ソースマップの利用有無(productionのときはソースマップを利用しない)
-const enabledSourceMap = MODE === "development";
+const enabledSourceMap = MODE === "production";
 
 // モジュールにオブジェクトを設定する
 module.exports = {

@@ -2,15 +2,17 @@
   <div class="p-task">
     <ul class="p-task__list">
       <draggable :forceFallback="true" handle=".u-handle" @change="onChange" v-bind="getOptions()">
-        <TaskItem
-          v-for="(task, index) in this.taskData"
-          :task-item="task"
-          :key="index + 1"
-          @isdone-event="changeIsDone"
-          @remove-event="removeItem"
-          @edit-event="taskEdit"
-          @editclose-event="coloseEdit"
-        />
+        <transition-group name="fadeOut">
+          <TaskItem
+            v-for="(task, index) in this.taskData"
+            :task-item="task"
+            :key="index + 1"
+            @isdone-event="changeIsDone"
+            @remove-event="removeItem"
+            @edit-event="taskEdit"
+            @editclose-event="coloseEdit"
+          />
+        </transition-group>
       </draggable>
     </ul>
   </div>
@@ -58,4 +60,15 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.fadeOut-enter-active,
+.fadeOut-leave-active {
+  transition: all 1s;
+}
+
+.fadeOut-enter,
+.fadeOut-leave-to {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+</style>
