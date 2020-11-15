@@ -4,19 +4,28 @@
       <div class="close icon" @click="close"></div>
       <div class="c-modal__body">
         <li class="c-modal__body__list">
-          <IconLogo :icon-path="this.vue_path" :todo-link="todoLink.vue"/>
+          <IconLogo
+            :icon-path="this.vue_path"
+            :todo-link="todoLink.vue"
+          />
           <div>
             <p>Vue.js todo list</p>
           </div>
         </li>
         <li class="c-modal__body__list">
-          <IconLogo :icon-path="this.jquery_path" />
+          <IconLogo
+            :icon-path="this.jquery_path"
+            :todo-link="todoLink.jquery"
+            />
           <div>
             <p>jQuery todo list</p>
           </div>
         </li>
         <li class="c-modal__body__list">
-          <IconLogo :icon-path="this.react_path" />
+          <IconLogo
+            :icon-path="this.react_path"
+            :todo-link="todoLink.react"
+            />
           <div>
             <p>React.js todo list</p>
           </div>
@@ -37,8 +46,8 @@ export default {
       react_path: "../img/react_logo.svg",
       todoLink: {
         vue: "http://todo-app.shimanamisan.com/",
-        jquery: "",
-        react: "",
+        jquery: "https://jq-task-app.shimanamisan.com/",
+        react: "https://react-task-app.shimanamisan.com/",
       },
     };
   },
