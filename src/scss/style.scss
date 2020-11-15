@@ -6,13 +6,7 @@
 @import "foundation/base";
 
 // レイアウト
-@import "layout/*";
+@import "layout/**";
 
 // コンポーネント
-@import "object/component/*";
-
-// プロジェクト
-@import "object/component/project/*";
-
-//ユーティリティ
-@import "object/utility/*";
+@import "object/**";
